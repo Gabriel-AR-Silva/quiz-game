@@ -13,12 +13,6 @@
           <button class="btn btn-primary mt-4" @click.prevent="submitAnswer()">Responder</button>
           <span v-if="answerError" class="text-danger">{{ answerError }}</span>
         </div>
-
-
-        <pre>
-          {{ infoQuiz ? infoQuiz : error }}
-          {{ answers ? answers : error }}
-        </pre>
       </div>
     </div>
   </template>
@@ -48,7 +42,7 @@
         this.activeBTN = this.activeBTN || this.activeBTN === 0 ? (this.activeBTN === index ? null : index) : index;
       },
       submitAnswer() {
-        this.answerError = this.activeBTN || this.activeBTN === 0 ? null : 'Hey there: Please, choose some answer !!!';
+        this.answerError = this.activeBTN || this.activeBTN === 0 ? null : 'Hello: Please choose any answer !!';
 
         if (this.activeBTN || this.activeBTN === 0) { 
           this.correctAnswers += this.answers[this.activeBTN] == this.infoQuiz.correct_answer ? 1 : 0;
