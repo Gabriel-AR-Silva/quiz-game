@@ -1,20 +1,20 @@
 <template>
   <div class="quiz">
     <h1>Home</h1>
+
     <router-link to="/">Inicio</router-link>
-    <pre>
-      {{ quiz ? quiz : error }}
-      {{ answers ? answers : error }}
-    </pre>
+
+    <QuizCard :infoQuiz="quiz" :answers="answers" @nextQuiz="loadQuiz"/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import QuizCard from "@/components/QuizCard";
 
 export default {
   name: 'QuizView',
-  components: {},
+  components: { QuizCard },
   data() {
     return {
       quiz: [],
@@ -30,10 +30,15 @@ export default {
     }
   },
   methods: {
+    loadQuiz() {
+      this.getQuiz();
+    },
     shuffleAnswers(quizParam) {
       Array.prototype.insert = function(index, resposta) {
           this.splice(index, 0, resposta);
       }
+
+      this.answers = [];
 
       this.answers.insert(Math.floor(Math.random() * 3), quizParam.correct_answer);
       this.answers.insert(Math.floor(Math.random() * 3), quizParam.incorrect_answers[0]);
